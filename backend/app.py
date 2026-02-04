@@ -16,7 +16,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 def index():
     return "BizTone Converter Backend is running!"
 
-@app.route('/convert', methods=['POST'])
+@app.route('/api/convert', methods=['POST'])
 def convert_text():
     if not GROQ_API_KEY:
         return jsonify({"error": "GROQ_API_KEY not set"}), 500
