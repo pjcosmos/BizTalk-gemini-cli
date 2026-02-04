@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+venv/
+bin/
+include/
+lib/
+lib64/
+share/
+local/
+
+# Flask
+instance/
+.flaskenv
+
+# Editor-specific files
+.vscode/
+.idea/
+
+# Logs
+*.log
+flask.log
+
+# Environment variables
+.env
+.env.*
+!.env.example
