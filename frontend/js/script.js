@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         convertButton.textContent = '변환 중...'; // 로딩 상태 표시
 
         try {
-            const response = await fetch('http://localhost:5001/api/convert', { // 가상의 API 엔드포인트
+            const response = await fetch('http://127.0.0.1:5000/api/convert', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'API 호출에 실패했습니다.');
+                throw new Error(errorData.error || 'API 호출에 실패했습니다.');
             }
 
             const data = await response.json();
