@@ -4,31 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BizTone Converter</title>
-    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>BizTone Converter</h1>
-        <div class="converter-card">
-            <div class="input-section">
-                <h2>원본 입력</h2>
-                <textarea id="inputText" placeholder="여기에 원본 텍스트를 입력하세요. (최대 500자)" maxlength="500"></textarea>
-                <div class="char-count">
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto max-w-4xl text-center py-8 px-4">
+        <h1 class="text-4xl font-bold text-gray-800 mb-8">BizTone Converter</h1>
+        <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col lg:flex-row gap-8">
+            <div class="flex-1 flex flex-col">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-left">원본 입력</h2>
+                <textarea id="inputText" placeholder="여기에 원본 텍스트를 입력하세요. (최대 500자)" maxlength="500" class="w-full h-48 p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 resize-y"></textarea>
+                <div class="text-sm text-gray-500 text-right mt-1">
                     <span id="currentCharCount">0</span> / 500
                 </div>
             </div>
-            <div class="controls-section">
-                <div class="target-selection">
-                    <label><input type="radio" name="target" value="Upward" checked> 상사</label>
-                    <label><input type="radio" name="target" value="Lateral"> 타팀 동료</label>
-                    <label><input type="radio" name="target" value="External"> 고객</label>
+            <div class="flex flex-col items-center justify-center gap-6 lg:w-1/6 order-first lg:order-none">
+                <div class="flex flex-row lg:flex-col gap-4">
+                    <label class="flex items-center gap-2 text-lg text-gray-700 cursor-pointer"><input type="radio" name="target" value="Upward" class="form-radio h-5 w-5 text-indigo-600" checked> 상사</label>
+                    <label class="flex items-center gap-2 text-lg text-gray-700 cursor-pointer"><input type="radio" name="target" value="Lateral" class="form-radio h-5 w-5 text-indigo-600"> 동료</label>
+                    <label class="flex items-center gap-2 text-lg text-gray-700 cursor-pointer"><input type="radio" name="target" value="External" class="form-radio h-5 w-5 text-indigo-600"> 고객</label>
                 </div>
-                <button id="convertButton">변환하기</button>
+                <button id="convertButton" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300 disabled:bg-gray-400">변환하기</button>
             </div>
-            <div class="output-section">
-                <h2>변환 결과</h2>
-                <textarea id="outputText" readonly placeholder="변환된 텍스트가 여기에 표시됩니다."></textarea>
-                <button id="copyButton">복사하기</button>
+            <div class="flex-1 flex flex-col">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-left">변환 결과</h2>
+                <textarea id="outputText" readonly placeholder="변환된 텍스트가 여기에 표시됩니다." class="w-full h-48 p-4 border border-gray-300 bg-gray-50 rounded-md resize-y"></textarea>
+                <button id="copyButton" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-800 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-400 mt-4 self-end">복사하기</button>
             </div>
         </div>
     </div>
