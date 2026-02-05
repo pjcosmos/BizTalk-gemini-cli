@@ -1,55 +1,107 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="dark"> <!-- 기본으로 다크 모드 설정 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BizTone Converter</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // 'media' 또는 'class'
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4A90E2',
+                        secondary: '#F5F7FA',
+                        'text-primary': '#2D3748', // 진한 회색
+                        'text-secondary': '#718096', // 연한 회색
+                        'b-primary': '#EDF2F7', // 테두리 색상
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', 'Noto Sans KR', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.6/dist/web/static/pretendard.css">
+    <style>
+        /* 다크모드 스크롤바 스타일 (선택적) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A202C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4A5568;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #718096;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>BizTone Converter</h1>
-            <p>전문적인 비즈니스 언어로 당신의 생각을 변환하세요.</p>
+<body class="bg-gray-100 dark:bg-gray-900 font-sans leading-normal tracking-normal">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">BizTone Converter</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300">전문적인 비즈니스 언어로 당신의 생각을 변환하세요.</p>
         </header>
 
-        <main class="main-content">
-            <section class="input-section card">
-                <h2>원문 입력</h2>
-                <textarea id="original-text" placeholder="여기에 변환할 내용을 입력하세요 (최대 500자)" maxlength="500"></textarea>
-                <div class="char-count">
-                    <span id="current-char-count">0</span> / 500
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Input Section -->
+            <section class="input-section bg-white dark:bg-gray-800 shadow-2xl rounded-xl p-6 lg:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-5 pb-3 border-b-2 border-gray-200 dark:border-gray-700">원문 입력</h2>
+                <div class="relative">
+                    <textarea id="original-text" class="w-full h-48 p-4 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out text-base text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 resize-none" placeholder="여기에 변환할 내용을 입력하세요..." maxlength="500"></textarea>
+                    <div class="absolute bottom-3 right-3 text-sm text-gray-500 dark:text-gray-400">
+                        <span id="current-char-count">0</span> / 500
+                    </div>
                 </div>
-                <div class="target-selection">
-                    <label for="target-audience">변환 대상:</label>
-                    <select id="target-audience">
+                <div class="mt-5">
+                    <label for="target-audience" class="block text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">변환 대상</label>
+                    <select id="target-audience" class="w-full p-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 dark:text-gray-200">
                         <option value="상사">상사 (Upward)</option>
                         <option value="타팀 동료">타팀 동료 (Lateral)</option>
                         <option value="고객">고객 (External)</option>
                     </select>
                 </div>
-                <button id="convert-button">변환하기</button>
+                <button id="convert-button" class="w-full mt-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800 transition duration-300 ease-in-out transform hover:-translate-y-1 disabled:from-gray-500 disabled:to-gray-500 disabled:cursor-not-allowed disabled:transform-none">
+                    변환하기
+                </button>
             </section>
 
-            <section class="output-section card">
-                <h2>변환 결과</h2>
-                <div id="converted-text-container">
-                    <textarea id="converted-text" readonly placeholder="변환된 결과가 여기에 표시됩니다."></textarea>
-                    <button id="copy-button">복사하기</button>
-                </div>
-                <div class="feedback-section">
-                    <p>변환 결과가 도움이 되셨나요?</p>
-                    <button id="feedback-good">👍 도움됨</button>
-                    <button id="feedback-bad">👎 도움 안 됨</button>
+            <!-- Output Section -->
+            <section class="output-section bg-white dark:bg-gray-800 shadow-2xl rounded-xl p-6 lg:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-5 pb-3 border-b-2 border-gray-200 dark:border-gray-700">변환 결과</h2>
+                <div class="relative h-full">
+                     <textarea id="converted-text" class="w-full h-48 p-4 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-base text-gray-800 dark:text-gray-200 resize-none" readonly placeholder="변환된 결과가 여기에 표시됩니다."></textarea>
+                    <button id="copy-button" class="absolute top-0 right-0 mt-2 mr-2 bg-gray-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-gray-700 transition duration-150 text-sm">
+                        복사
+                    </button>
+                    <div class="feedback-section text-center mt-6 pt-6 border-t border-dashed border-gray-200 dark:border-gray-700">
+                        <p class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">변환 결과가 도움이 되셨나요?</p>
+                        <div class="flex justify-center space-x-4">
+                            <button id="feedback-good" class="flex items-center justify-center bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm">
+                                <span role="img" aria-label="good" class="mr-2">👍</span> 도움됨
+                            </button>
+                            <button id="feedback-bad" class="flex items-center justify-center bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm">
+                                <span role="img" aria-label="bad" class="mr-2">👎</span> 도움 안 됨
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
 
-        <footer>
-            <p>&copy; 2024 BizTone Converter. All rights reserved.</p>
+        <footer class="text-center mt-12 py-6 border-t border-gray-200 dark:border-gray-700">
+            <p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2024 BizTone Converter. All rights reserved.</p>
         </footer>
     </div>
+
     <script src="js/script.js"></script>
 </body>
 </html>
