@@ -22,12 +22,12 @@ CORS(app)
 
 # Groq 클라이언트 초기화
 # API 키는 환경 변수 'GROQ_API_KEY'에서 자동으로 로드됩니다.
-groq_client = None
+groq_model = None
 try:
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         raise ValueError("GROQ_API_KEY environment variable not set.")
-    groq_client = Groq(api_key=api_key)
+    groq_model = Groq(api_key=api_key)
     logging.info("Groq client initialized successfully.")
 except ValueError as e:
     logging.error(f"Configuration Error: {e}")
